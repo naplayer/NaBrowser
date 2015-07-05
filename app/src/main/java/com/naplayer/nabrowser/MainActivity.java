@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements SimpleBrowserFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -92,9 +92,16 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position);
+            //return PlaceholderFragment.newInstance(position);
+
+            switch (position){
+                case 0:
+                    return SimpleBrowserFragment.newInstance(String.valueOf(position), "http://www.msn.co.jp");
+                case 1:
+                    return SimpleBrowserFragment.newInstance(String.valueOf(position), "http://yahoo.co.jp");
+            }
+
+            return null;
         }
 
         @Override
@@ -146,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_simple_browser, container, false);
 
             WebView webview = (WebView)rootView.findViewById(R.id.webview);
             webview.setWebViewClient(new WebViewClient());
