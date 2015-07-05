@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity implements SimpleBrowserFragment.OnFragmentInteractionListener {
+public class MainActivity extends ActionBarActivity implements SimpleBrowserFragment.OnFragmentInteractionListener, DualBrowserFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -99,6 +99,8 @@ public class MainActivity extends ActionBarActivity implements SimpleBrowserFrag
                     return SimpleBrowserFragment.newInstance(String.valueOf(position), "http://www.msn.co.jp");
                 case 1:
                     return SimpleBrowserFragment.newInstance(String.valueOf(position), "http://yahoo.co.jp");
+                case 2:
+                    return DualBrowserFragment.newInstance(String.valueOf(position), "http://msn.co.jp", "http://yahoo.co.jp");
             }
 
             return null;
@@ -106,8 +108,8 @@ public class MainActivity extends ActionBarActivity implements SimpleBrowserFrag
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 2;
+            // Show * total pages.
+            return 3;
         }
 
         @Override
@@ -122,53 +124,6 @@ public class MainActivity extends ActionBarActivity implements SimpleBrowserFrag
                     return getString(R.string.title_section3).toUpperCase(l);
             }
             return null;
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_simple_browser, container, false);
-
-            WebView webview = (WebView)rootView.findViewById(R.id.webview);
-            webview.setWebViewClient(new WebViewClient());
-
-            Integer position = getArguments().getInt(ARG_SECTION_NUMBER);
-            switch(position){
-                case 0:
-                    webview.loadUrl("http://msn.co.jp/");
-                    break;
-                case 1:
-                    webview.loadUrl("http://yahoo.co.jp/");
-                    break;
-            }
-
-            return rootView;
         }
     }
 
