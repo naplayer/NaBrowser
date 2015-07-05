@@ -45,14 +45,16 @@ public class SimpleBrowserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_simple_browser, container, false);
-        WebView web = (WebView)v.findViewById(R.id.webview);
 
-        web.setWebViewClient(new WebViewClient());
         String position = getArguments().getString(ARG_SECTION_NUMBER);
         String url = getArguments().getString(ARG_URL);
-
         Toast.makeText((Activity)mListener, position, Toast.LENGTH_SHORT).show();
+
+        View v = inflater.inflate(R.layout.fragment_simple_browser, container, false);
+        WebView web = (WebView)v.findViewById(R.id.webview);
+        web.setWebViewClient(new WebViewClient());
+        web.getSettings().setJavaScriptEnabled(true);
+        web.getSettings().setBuiltInZoomControls(true);
         web.loadUrl(url);
 
         return v;

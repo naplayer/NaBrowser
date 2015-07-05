@@ -49,19 +49,23 @@ public class DualBrowserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dual_browser, container, false);
 
         String position = getArguments().getString(ARG_SECTION_NUMBER);
         String url1 = getArguments().getString(ARG_URL_1);
         String url2 = getArguments().getString(ARG_URL_2);
         Toast.makeText((Activity)mListener, position, Toast.LENGTH_SHORT).show();
 
+        View v = inflater.inflate(R.layout.fragment_dual_browser, container, false);
         WebView web1 = (WebView)v.findViewById(R.id.webview1);
         web1.setWebViewClient(new WebViewClient());
+        web1.getSettings().setJavaScriptEnabled(true);
+        web1.getSettings().setBuiltInZoomControls(true);
         web1.loadUrl(url1);
 
         WebView web2 = (WebView)v.findViewById(R.id.webview2);
         web2.setWebViewClient(new WebViewClient());
+        web2.getSettings().setJavaScriptEnabled(true);
+        web2.getSettings().setBuiltInZoomControls(true);
         web2.loadUrl(url2);
 
         return v;

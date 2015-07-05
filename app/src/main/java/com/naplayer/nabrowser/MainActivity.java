@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements SimpleBrowserFrag
         setContentView(R.layout.activity_main);
 
         hideActionbar();
-        
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
